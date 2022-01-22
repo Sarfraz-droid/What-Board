@@ -18,9 +18,10 @@ function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
                 stroke={props.Data.color}
                 strokeWidth={props.Data.width}
                 lineCap={'round'}
-                onMouseOver={() => {
+                onMouseOver={(e) => {
                     if(props.id == -1) return;
                     if(isErasing) {
+                        e.target.remove()
                         setBoardData.DeleteData(props.id);
                     }
                 }}
