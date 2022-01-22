@@ -18,6 +18,11 @@ function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
                 stroke={props.Data.color}
                 strokeWidth={props.Data.width}
                 lineCap={'round'}
+                onMouseDown={(e) => {
+                    console.log("Mouse Down : ", e.evt.buttons)
+                }}
+
+                draggable={true}
                 onMouseOver={(e) => {
 
                     if(props.id == -1) return;
