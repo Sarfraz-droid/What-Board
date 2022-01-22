@@ -9,7 +9,7 @@ function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
     const {setBoardData,currentLine,isErasing} = useContext(BoardContext);
 
 
-    console.log("Draw Pen : ", props.id);
+    // console.log("Draw Pen : ", props.id);
 
     return (
             <Line

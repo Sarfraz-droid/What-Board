@@ -5,7 +5,7 @@ import {BoardData} from "../Datahandler/BoardData";
 import {BoardContext} from "../index";
 
 function ShowBoard(props: { Board: BoardData, key: number}) {
-    console.log("ShowBoard",props.Board.id);
+    // console.log("ShowBoard",props.Board.id);
     switch (props.Board.type) {
         case 'pen':
             return (
