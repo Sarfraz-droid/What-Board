@@ -54,6 +54,9 @@ function DrawingBoard() {
     const newLine:Array<number> = SmoothCurves(points);
     setcurrentLine.getPenPoints();
     setcurrentLine.setPenPoints([],true);
+
+    if(newLine.length <= 1) return;
+
     // @ts-ignore
     setBoardData.addBoardData(currentLine.currentPen, {
       data: setcurrentLine.getCurrentTool(),
