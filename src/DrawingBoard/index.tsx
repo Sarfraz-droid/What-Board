@@ -98,7 +98,7 @@ function DrawingBoard() {
   // @ts-ignore
   return (
     <div>
-      <BoardContext.Provider value={{currentLine,setcurrentLine,boardData,setBoardData}}>
+      <BoardContext.Provider value={{currentLine,setcurrentLine,boardData,setBoardData,isErasing}}>
         <Tools/>
         <Stage
         width={window.innerWidth}
