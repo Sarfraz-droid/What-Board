@@ -21,8 +21,8 @@ function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
                 onMouseOver={(e) => {
 
                     if(props.id == -1) return;
-                    if(isErasing) {
-                        // setBoardData.DeleteData(props.id);
+                    if(e.evt.buttons === 1) {
+                        setBoardData.DeleteData(props.id);
                         console.log("Erasing");
                         e.target.remove()
 
