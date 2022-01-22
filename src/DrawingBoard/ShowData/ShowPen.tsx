@@ -19,10 +19,11 @@ function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
                 strokeWidth={props.Data.width}
                 lineCap={'round'}
                 onMouseOver={(e) => {
+                    console.log("Erasing");
+                    e.target.remove()
+
                     if(props.id == -1) return;
                     if(isErasing) {
-                        console.log("Erasing");
-                        e.target.remove()
                         // setBoardData.DeleteData(props.id);
                     }
                 }}
