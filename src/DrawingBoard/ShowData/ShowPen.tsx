@@ -12,7 +12,6 @@ function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
     console.log("Draw Pen : ", props.id);
 
     return (
-        <>
             <Line
                 points={props.penPoints}
                 stroke={props.Data.color}
@@ -36,7 +35,6 @@ function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
                 }}
 
             />
-        </>
     )
 }
 

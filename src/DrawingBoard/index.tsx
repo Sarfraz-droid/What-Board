@@ -1,5 +1,6 @@
+
 import { Stage, Layer, Line } from 'react-konva';
-import {createContext, useState} from 'react';
+import React,{createContext, useState} from 'react';
 import useDraw from './CustomHooks/useDraw/useDraw';
 import useBoardData from "./CustomHooks/useBoardData/useBoardData";
 import {BoardData} from "./Datahandler/BoardData";
@@ -83,15 +84,13 @@ function DrawingBoard() {
     const board_info = setBoardData.getData();
 
     return (
-        <>
+        <React.Fragment>
           {board_info.map((info:BoardData, index:number) => {
             return (
-              <>
                 <ShowBoard Board={info} key={index} />
-              </>
             )
           })}
-        </>
+        </React.Fragment>
     )
   }
 
