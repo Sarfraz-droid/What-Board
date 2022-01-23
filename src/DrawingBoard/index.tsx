@@ -1,5 +1,5 @@
 
-import { Stage, Layer, Line } from 'react-konva';
+import { Stage, Layer, Line, useStrictMode } from 'react-konva';
 import React,{createContext, useState} from 'react';
 import useDraw from './CustomHooks/useDraw/useDraw';
 import useBoardData from "./CustomHooks/useBoardData/useBoardData";
@@ -24,6 +24,8 @@ function DrawingBoard() {
   const [isErasing, setisErasing] = useState(false);
   const [boardData, setBoardData] = useBoardData();
   // const [isErasing, setisErasing] = useState(false);
+
+  useStrictMode(true);
 
   function MouseDown(e: any) {
 
