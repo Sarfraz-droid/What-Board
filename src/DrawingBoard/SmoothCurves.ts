@@ -3,7 +3,7 @@ const turf = require('@turf/turf');
 export function SmoothCurves(point:Array<number>){
   const pts:any = [];
   const n = point.length;
-  for(let i = 0; i < point.length; i+= 32) {
+  for(let i = 0; i < point.length; i+= 12) {
     const pt: any = [];
     pt.push(point[i]);
 
