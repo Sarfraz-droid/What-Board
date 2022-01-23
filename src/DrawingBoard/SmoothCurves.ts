@@ -3,7 +3,7 @@ const turf = require('@turf/turf');
 export function SmoothCurves(point:Array<number>){
   const pts:any = [];
   const n = point.length;
-  for(let i = 0; i < point.length; i+= 16) {
+  for(let i = 0; i < point.length; i+= 32) {
     const pt: any = [];
     pt.push(point[i]);
 
@@ -20,16 +20,17 @@ export function SmoothCurves(point:Array<number>){
   pts.push(pt);
 
   console.log(pts);
+
   if(pts.length <= 2){
     return point;
   }
-  console.log(turf.lineString(pts));
-  const Simplified:any = turf.bezierSpline(turf.lineString(
-    pts));
-
-  console.log("Simplified");
-  console.log(Simplified);
-  const coordinates = Simplified.geometry.coordinates;
+  // console.log(turf.lineString(pts));
+  // const Simplified:any = turf.bezierSpline(turf.lineString(
+  //   pts));
+  //
+  // console.log("Simplified");
+  // console.log(Simplified);
+  const coordinates = pts;
 
   const newPoints:any = [];
 

@@ -4,7 +4,7 @@ import {Pen} from "../Datahandler/ToolData";
 
 import {BoardContext} from "../index";
 
-function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
+function DrawPen(props: { Data: Pen, id: string, penPoints: Array<number> }) {
 
     const {setBoardData,currentLine,isErasing} = useContext(BoardContext);
 
@@ -20,16 +20,15 @@ function DrawPen(props: { Data: Pen, id: number, penPoints: Array<number> }) {
                 onMouseDown={(e) => {
                     console.log("Mouse Down : ", e.evt.buttons)
                 }}
-
-                draggable={true}
+                _useStrictMode={true}
+                bezier={true}
+                tension={0.5}
                 onMouseOver={(e) => {
-
-                    if(props.id == -1) return;
+                    if(props.id === "-1") return;
                     console.log("Mouse Over : ", e.evt.buttons);
-                    if(e.evt.buttons === 1) {
+                    if(e.evt.buttons === 1 && isErasing) {
                         setBoardData.DeleteData(props.id);
                         console.log("Erasing");
-                        e.target.remove()
 
                     }
                 }}

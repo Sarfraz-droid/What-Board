@@ -54,7 +54,7 @@ function DrawingBoard() {
     setisErasing(false);
     // @ts-ignore
     const points = setcurrentLine.getPenPoints()
-    const newLine:Array<number> = points;
+    const newLine:Array<number> = SmoothCurves(points);
     setcurrentLine.getPenPoints();
     setcurrentLine.setPenPoints([],true);
 
@@ -74,7 +74,7 @@ function DrawingBoard() {
       case 'pen':
         const penPoints = setcurrentLine.getPenPoints();
         return(
-          <DrawPen Data={currentLine.Pen} penPoints={penPoints} id={-1} />
+          <DrawPen Data={currentLine.Pen} penPoints={penPoints} id={"-1"} />
         )
         break;
     }

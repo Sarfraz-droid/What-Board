@@ -1,7 +1,8 @@
 import {useState} from "react";
 import {BoardData} from "../../Datahandler/BoardData";
 import {Pen} from "../../Datahandler/ToolData";
-
+// @ts-ignore
+import { v4 as uuid4 } from "uuid";
 export default function useBoardData() {
     const [boardData, setBoardData] = useState<Array<BoardData>>([] as Array<BoardData>);
 
@@ -9,9 +10,10 @@ export default function useBoardData() {
 
         switch (type) {
             case 'pen':
+                const id:string = uuid4();
                 const newBoardData = {
                     type: type,
-                    id: boardData.length,
+                    id: id,
                     Pen: info
                 };
                 // @ts-ignore
@@ -30,13 +32,15 @@ export default function useBoardData() {
         return boardData;
     }
 
-    function DeleteData(id: number){
+    function DeleteData(id: string){
         console.log("DeleteData : ", id);
-        setBoardData((boardData) => {
-            return boardData.filter((data) => {
-                return data.id !== id;
-            });
+        console.log("boardData : ", boardData.length);
+        const newBoardData = boardData.filter((data) => {
+            return data.id !== id;
         });
+        console.log("newBoardData : ", newBoardData.length);
+        setBoardData(newBoardData);
+
     }
 
 
