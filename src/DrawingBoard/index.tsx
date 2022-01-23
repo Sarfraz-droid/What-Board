@@ -52,7 +52,7 @@ function DrawingBoard() {
     setisErasing(false);
     // @ts-ignore
     const points = setcurrentLine.getPenPoints()
-    const newLine:Array<number> = SmoothCurves(points);
+    const newLine:Array<number> = points;
     setcurrentLine.getPenPoints();
     setcurrentLine.setPenPoints([],true);
 
