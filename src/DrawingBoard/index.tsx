@@ -1,5 +1,5 @@
 
-import { Stage, Layer, Line, useStrictMode } from 'react-konva';
+import { Stage, Layer, Line, Transformer, useStrictMode } from 'react-konva';
 import React,{createContext, useState} from 'react';
 import useDraw from './CustomHooks/useDraw/useDraw';
 import useBoardData from "./CustomHooks/useBoardData/useBoardData";
@@ -10,6 +10,7 @@ import styles from "../App.module.scss";
 
 import ShowBoard from "./ShowData/ShowBoard";
 import DrawPen from "./ShowData/ShowPen";
+import Handler from "./Transformer/Handler";
 
 import Tools from "./ToolShow/Tools";
 
@@ -23,9 +24,24 @@ function DrawingBoard() {
   const [isDrawing, setisDrawing] = useState(false);
   const [isErasing, setisErasing] = useState(false);
   const [boardData, setBoardData] = useBoardData();
+
+  // USE REF
+  const shapeRef = React.useRef<any>(null);
+  const TrRef = React.useRef<any>(null);
+
   // const [isErasing, setisErasing] = useState(false);
 
   useStrictMode(true);
+
+  React.useEffect(() => {
+    console.log(shapeRef,TrRef);
+    if(shapeRef.current != null && TrRef != null){
+      TrRef.current.nodes([shapeRef.current]);
+      TrRef.current.getLayer().batchDraw();
+    }
+  }, [shapeRef]);
+
+
 
   function MouseDown(e: any) {
 
@@ -37,6 +53,14 @@ function DrawingBoard() {
 
     setisDrawing(true);
     const points:Array<number> = [e.evt.offsetX, e.evt.offsetY];
+
+    console.log(e);
+
+    if(e.target === e.currentTarget)
+    {
+      TrRef.current.nodes([]);
+    }
+
     // @ts-ignore
     setcurrentLine.setPenPoints(points,true);
   }
@@ -99,7 +123,7 @@ function DrawingBoard() {
   // @ts-ignore
   return (
     <div>
-      <BoardContext.Provider value={{currentLine,setcurrentLine,boardData,setBoardData,isErasing}}>
+      <BoardContext.Provider value={{currentLine,setcurrentLine,boardData,setBoardData,isErasing,shapeRef,TrRef}}>
         <Tools/>
         <Stage
         width={window.innerWidth}
@@ -109,11 +133,14 @@ function DrawingBoard() {
         onMouseUp={MouseUp}
       >
         <Layer>
-          <BoardContext.Provider value={{currentLine,setcurrentLine,boardData,setBoardData,isErasing}}>
+          <BoardContext.Provider value={{currentLine,setcurrentLine,boardData,setBoardData,isErasing,shapeRef,TrRef}}>
 
           {ShowBoardData()}
 
           {ShowData()}
+
+          <Handler />
+
           </BoardContext.Provider>
         </Layer>
       </Stage>

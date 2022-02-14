@@ -53,6 +53,12 @@ export default function UseDraw() {
         }
     }
 
+    function setCurrentPen(type: string){
+        setState((state) => ({
+            ...state,
+            currentPen: type,
+        }));
+    }
 
-    return [state, {setPen, setCurrentValue,setPenPoints,getPenPoints,getCurrentTool}] as any
+    return [state, {setPen, setCurrentValue,setPenPoints,getPenPoints,getCurrentTool,setCurrentPen}] as any
 }

@@ -3,6 +3,7 @@ import {BoardContext} from "../index";
 import {Pen} from "../Datahandler/ToolData";
 import styles from '../../styles/Tools.module.scss'
 import {BsPenFill,BsEraserFill} from "react-icons/bs";
+import {FaMousePointer} from "react-icons/fa";
 
 export default function Tools(){
     const {currentLine,setcurrentLine} = React.useContext(BoardContext);
@@ -11,6 +12,11 @@ export default function Tools(){
     useEffect(()=>{
         setpen(currentLine.Pen);
     },[])
+
+    useEffect(() => {
+        console.log("Current Line",currentLine);
+    }, [currentLine]);
+
 
     useEffect(() => {
         setcurrentLine.setPen(pen);
@@ -23,15 +29,20 @@ export default function Tools(){
         })
     }
 
+
+
     return (
         <>
             <div className={styles.tools}>
                 <button id={"pen"}
-                    onClick={() => setEraser({value: false})}
+                    onClick={() => {
+                        setcurrentLine.setCurrentPen("pen");
+                        setEraser({value: false})
+                    }}
                 >
                     <BsPenFill
                         style={{
-                            color: !pen.isEraser ? "#3F85ED" : "#B0B0B0FF",
+                            color: (!pen.isEraser && currentLine.currentPen === 'pen') ? "#3F85ED" : "#B0B0B0FF",
                         }}
                     />
 
@@ -39,11 +50,23 @@ export default function Tools(){
 
                 <button
                     id={"eraser"}
-                    onClick={() => setEraser({value: true})}
+                    onClick={() => {
+                        setcurrentLine.setCurrentPen("pen");
+                        setEraser({value: true})
+                    }}
                 >
                     <BsEraserFill
                         style={{
-                            color: pen.isEraser ? "#3F85ED" : "#B0B0B0FF",
+                            color: (pen.isEraser && currentLine.currentPen === 'pen' ) ? "#3F85ED" : "#B0B0B0FF",
+                        }}
+                    />
+                </button>
+
+                <button>
+                    <FaMousePointer
+                        onClick={() => setcurrentLine.setCurrentPen('cursor')}
+                        style={{
+                            color: (currentLine.currentPen === 'cursor') ? "#3F85ED" : "#B0B0B0FF",
                         }}
                     />
                 </button>
